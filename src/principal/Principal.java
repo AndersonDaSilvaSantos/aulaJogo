@@ -10,6 +10,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import telas.TelaCalculadora;
+import telas.TelaCalculoIMC;
 import telas.TelaJogoForca;
 import telas.TelaJogoVelha;
 
@@ -17,13 +18,16 @@ public class Principal extends JFrame implements ActionListener {
 
 	private JMenuBar jmb = new JMenuBar();
 	private JMenu jogos = new JMenu("Jogos");
+	private JMenu utilitarios = new JMenu("Utilitários");
 	private JMenuItem jogoVelha = new JMenuItem("Jogo da Velha");
 	private JMenuItem jogoForca = new JMenuItem("Jogo da Forca");
 	private JMenuItem calculadora = new JMenuItem("Calculadora");
+	private JMenuItem calcuLoIMC = new JMenuItem("Calculo do IMC");
 	private JDesktopPane desk = new JDesktopPane();
 	private TelaJogoVelha telaJogoVelha;
 	private TelaJogoForca telaJogoForca;
 	private TelaCalculadora telaCalculadora;
+	private TelaCalculoIMC telaCalculoIMC;
 
 	public Principal() {
 		setSize(800, 600);
@@ -33,6 +37,7 @@ public class Principal extends JFrame implements ActionListener {
 		jogos.add(jogoVelha);
 		jogos.add(jogoForca);
 		jogos.add(calculadora);
+		jogos.add(calcuLoIMC);
 
 		jogoVelha.addActionListener(this);
 		add(desk);
@@ -46,10 +51,14 @@ public class Principal extends JFrame implements ActionListener {
 		add(desk);
 		setVisible(true);
 
+		calcuLoIMC.addActionListener(this);
+		add(desk);
+		setVisible(true);
+
 	}
 
 	public static void main(String[] args) {
-		new Principal();
+		Principal p = new Principal();
 	}
 
 	@Override
@@ -77,5 +86,12 @@ public class Principal extends JFrame implements ActionListener {
 
 		}
 
+		if (e.getSource() == calcuLoIMC) {
+			if (telaCalculoIMC == null) {
+				telaCalculoIMC = new TelaCalculoIMC();
+				desk.add(telaCalculoIMC);
+			}
+
+		}
 	}
 }
