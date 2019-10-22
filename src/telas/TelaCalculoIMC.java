@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class TelaCalculoIMC extends JInternalFrame implements ActionListener {
@@ -14,7 +15,7 @@ public class TelaCalculoIMC extends JInternalFrame implements ActionListener {
 	private static TelaCalculoIMC tela;
 
 	private FlowLayout layout = new FlowLayout();
-	
+
 	private JLabel alt = new JLabel("Altura:");
 	private JLabel pes = new JLabel("Peso:");
 	private JTextField altura = new JTextField(10);
@@ -45,35 +46,36 @@ public class TelaCalculoIMC extends JInternalFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		double altura = 0;
-		double peso = 0;
-		double imc;
-		
-		imc = peso / (altura * altura);
-		
-		String r="";
-		
-		 if(imc < 18.5){
-             r = "Abaixo do peso";
-         }
-         else if(imc < 24.9){
-        	 r = "Peso ideal";
-         }
-         else if(imc < 29.9){
-        	 r = "Levemente acima do peso";
-         }
-         else if(imc < 34.9){
-        	 r = "Primeiro grau de obesidade";
-         }
-         else if(imc < 39.9){
-        	 r = "Segundo grau de obesidade";
-         }
-         else {
-        	 r = "Obesidade mórbida";
-         }
-		 resultado.setText(r);
-          
+		double alturaEmMetros = Double.parseDouble(altura.getText());
+		;
+		double pesoEmQuilogramas = Double.parseDouble(peso.getText());
+		;
+		double imc = pesoEmQuilogramas / (alturaEmMetros * alturaEmMetros);
 
+		String r = "";
+		JOptionPane.showMessageDialog(null, "IMC " + imc);
+
+		if (imc < 20) {
+			r = "Abaixo do peso ideal";
+		} else if (imc >= 20 && imc < 25) {
+			r = "Peso ideal";
+		} else if (imc > 25 && imc < 30) {
+			r = "Sobrepeso";
+		} else if (imc >= 30 && imc < 35) {
+			r = "Obesidade Moderada";
+		} else if (imc >= 35 && imc < 40) {
+			r = "Obesidade Severa";
+		} else if (imc >= 40 && imc < 50) {
+			r = "Obesidade Mórbida";
+		} else if (imc > 50) {
+			r = "Super-Obesidade";
+		}
+		
+		String result="";
+		JOptionPane.showMessageDialog(null, r);
+		resultado.setText(r);
 	}
+	
+	
 
 }
